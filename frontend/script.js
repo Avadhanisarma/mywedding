@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Calling appendMessage with bot response:', data.response);
                 // Check if the response is an array (for line-by-line display)
                 if (Array.isArray(data.response)) {
-                    let delayForThisResponse = 500; // Default delay
+                    let delayForThisResponse = 1500; // Default delay
                     if (message === 'tell us more') { // Check if it's the specific message
-                        delayForThisResponse = 1000; // Increased delay for "tell us more"
+                        delayForThisResponse = 1500; // Increased delay for "tell us more"
                     }
                     await typeMessageLineByLine(data.response, 'bot', delayForThisResponse);
                 } else {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     delay += 2500; // Increased delay
     setTimeout(() => {
         hideTypingIndicator();
-        appendMessage("Guided by divine grace and the blessings of our elders, We are cordially inviting you to witness the sacred beginning of our new journey together", 'bot');
+        appendMessage("Guided by divine grace and the blessings of our elders, We are cordially inviting you to witness the sacred beginning of our new journey together 💫", 'bot');
 
         showTypingIndicator();
     }, delay);
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     delay += 3000; // Increased delay
     setTimeout(() => {
         hideTypingIndicator();
-        appendMessage("We Avadhani and Aiswarya getting married 👩‍❤️‍👨", 'bot');        
+        appendMessage("We <b>Avadhani</b> and <b>Aishwarya</b> getting married 👩‍❤️‍👨", 'bot');        
         // Show the first question button after the last welcome message
         setTimeout(() => {
             questionButtonsDiv.style.display = 'flex';

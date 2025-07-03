@@ -4,7 +4,7 @@ html,
 body {
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 20px 0; /* Add padding at top and bottom */
     font-family: 'Open Sans', sans-serif;
     display: flex;
     justify-content: center;
@@ -26,19 +26,29 @@ body::before {
 }
 
 .chat-container {
-    background-color: rgba(255, 255, 255, 0.9);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    background-image: url('/static/images/backone.jpg');  /* <-- Move background here */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local; /* Ensure it stays inside scrollable container */
+    background-color: rgba(255, 255, 255, 0.95);  /* fallback */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 100%;
-    height: 100vh;
-    max-height: 100vh;
+    height: calc(100vh - 40px); /* Allow space for top & bottom padding */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 1;
+    justify-content: space-between;
+    min-height: 600px; 
 }
+
 
 .chat-header {
     background-color: #075e54;
@@ -81,20 +91,24 @@ body::before {
     flex-direction: column;
     position: relative;
     padding-bottom: 120px; /* Increased padding to make space for larger buttons */
+    background-color: rgba(19, 20, 9, 0.144); /* Optional semi-transparent layer */
+    backdrop-filter: blur(3px);
 }
 
 .chat-background-overlay {
-    position: absolute;
+    position: fixed; /* instead of absolute */
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background-image: url('/static/images/backone.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(3px);
     z-index: -1;
+    pointer-events: none;
 }
+
 
 .message {
     margin-bottom: 10px;
@@ -147,24 +161,24 @@ body::before {
     border-bottom: 7px solid transparent;
 }
 
-.initial-buttons,
-.question-buttons {
+.question-buttons,
+.initial-buttons {
+    position: fixed;        /* Fix to viewport */
+    bottom: 0;              /* Stick to bottom */
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #eee;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 15px; /* Adjusted padding */
-    position: absolute; /* Positioned absolutely within chat-box */
-    bottom: 0; /* Fixed to the bottom */
-    left: 0;
-    right: 0;
-    width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding in width */
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for the button area */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow at the top */
-    border-top: 1px solid #eee; /* Light border at the top */
-    z-index: 10; /* Ensure it's above messages */
-    align-items: center; /* Center buttons horizontally */
+    align-items: center;
+    z-index: 99;           /* Above messages and background */
 }
+
 
 /* Removed speech bubble tail for button containers */
 .initial-buttons::after,
@@ -185,7 +199,10 @@ body::before {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: calc(100% - 10px); /* Increased width by reducing padding calculation */
     max-width: 550px; /* Increased max-width */
-    align-self: center; /* Ensure individual buttons are centered */
+    align-self: center; 
+    width: 100%;              /* ✅ Full width inside container */
+    max-width: 500px;         /* ✅ Prevent over-stretch on large screens */
+    margin: 0 auto;       /* Ensure individual buttons are centered */
 }
 
 
@@ -229,6 +246,7 @@ body::before {
 /* Optional scrollbars styling */
 .chat-box::-webkit-scrollbar {
     width: 6px;
+    padding-bottom: 140px; 
 }
 
 .chat-box::-webkit-scrollbar-thumb {
@@ -246,6 +264,12 @@ body::before {
         padding: 10px 12px; /* Adjusted padding for smaller screens */
     }
     .chat-box {
-        padding-bottom: 130px; /* Adjust padding for smaller screens to accommodate buttons */
+        flex-grow: 1;
+        overflow-y: auto;
+        max-height: calc(100vh - 60px); /* subtract height of header and buttons */
+        padding-bottom: 120px;
+        position: relative;
     }
+    
+    
 }

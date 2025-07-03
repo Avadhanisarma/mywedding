@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AA wedding invitation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AA Wedding Invitation</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
@@ -13,22 +13,22 @@
         <div class="chat-header">
             <img src="/static/images/icon.png" alt="Wedding Icon" class="chat-header-icon">
             <div class="chat-header-info">
-                <div class="chat-header-name">Avadhani 🤝 Aiswarya Wedding Invitation</div>
+                <div class="chat-header-name"> 
+                    Avadhani 🤝 Aishwarya |
+                    Wedding Invitation</div>
                 <div class="chat-header-status" id="chat-header-status">Online</div>
             </div>
         </div>
         <div class="chat-box" id="chat-box">
-            <div class="chat-background-overlay" id="chat-background-overlay"></div>
+            <!-- <div class="chat-background-overlay" id="chat-background-overlay"></div> -->
             <!-- Chat messages will be loaded here -->
-            <!-- question-buttons moved back inside chat-box -->
-            <div class="question-buttons" id="question-buttons" style="display: none;">
-                <button id="when-btn">When is the wedding?</button>
-                <button id="venue-btn">Where is the venue?</button>
-                <button id="tell-btn">Tell me more?</button>
-                <button id="tell-us-more-btn">Tell us more?</button>
-            </div>
         </div>
-        <!-- The chat-input is hidden as per the button-driven flow -->
+        <div class="question-buttons" id="question-buttons" style="display: none;">
+            <button id="when-btn">When is the wedding?</button>
+            <button id="venue-btn">Where is the venue?</button>
+            <button id="tell-btn">Tell me more?</button>
+            <button id="tell-us-more-btn">Tell us more?</button>
+        </div>
         <div class="chat-input" id="chat-input" style="display: none;">
             <input type="text" id="user-input" placeholder="Type your message...">
             <button id="send-btn">Send</button>

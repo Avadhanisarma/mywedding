@@ -28,29 +28,25 @@ async def chat(message: str):
     message = message.lower()
     if "venue" in message:
         venue_info = (
-            "Our wedding will be held at Sri Lakshmi AC Convention Hall, "
-            "10-1 42, 98/8, Karmanghat Rd, opp. Indra Nagendra Theater, "
-            "Saroornagar, Brindavan Colony, Hyderabad, Telangana 500035. "
+            "It's at Sri Lakshmi AC Convention Hall,Karmanghat Rd,Hyderabad"
             "📍 Google Maps Location: <a href=\"https://maps.app.goo.gl/BxoAcbXcZThCENZh8\" target=\"_blank\">Click here for directions</a>"
         )
         return {"response": venue_info}
     elif "date" in message or "time" in message:
-        return {"response": "The wedding is on August 13, 2025 - Sumuhurtam at 3:34 AM (Early hours of August 14)"}
+        return {"response": [ "It's on August 13, 2025 ",
+                            "Sumuhurtam at 3:34 AM (Early hours of August 14)"]}
     elif "tell me more" in message:
         return {
             "response": (
-                "Please join us for the reception at the wedding venue from 7:00 PM onwards on August 13, 2025. 🎉\n\n"
-                "We can’t wait to celebrate this special evening with you! 💃🕺"
+                "Please join us for the reception at the wedding venue from 7:00 PM onwards on August 13, 2025"
             )
         }
     elif "tell us more" in message:
         return {
             "response": [
-                "You clicked Tell me more? Ohhh you're in now! 😎",
-                "🗓️ Block your calendar for August 13, 2025. No excuses. No rescheduling.",
-                "💼 Apply for leave — yep, we know it’s midweek... but this isn’t just another Wednesday. This is THE Wednesday.",
-                "📞 Cancel your meetings, snooze your team chats, and throw those ‘Do Not Disturb’ signs like confetti. 🎊",
-                "🎟️ Book your tickets ASAP — before prices surge and you're left watching  reels from your desk! 😜"
+                "🗓️ Block your calendar for August 13, 2025",
+                "💼 Apply for leave — yep, we know it’s midweek... but this isn’t just another Wednesday. This is THE Wednesday",
+                "We can’t wait to celebrate this special evening with you! 💃🕺",
             ]
         }
     else:
