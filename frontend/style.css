@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+html,
 body {
-    font-family: 'Open Sans', sans-serif; /* Apply the new, balanced font */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
     color: #333;
     position: relative;
     overflow: hidden;
@@ -27,13 +29,13 @@ body::before {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 90vh; /* Make chat container take 90% of viewport height */
-    max-height: 90vh; /* Ensure it doesn't exceed this */
     position: relative;
     z-index: 1;
 }
@@ -74,12 +76,11 @@ body::before {
 .chat-box {
     flex-grow: 1;
     padding: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    /* Removed max-height: 70vh; */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     position: relative;
-    /* Removed overflow: hidden; */
+    padding-bottom: 120px; /* Increased padding to make space for larger buttons */
 }
 
 .chat-background-overlay {
@@ -150,23 +151,43 @@ body::before {
 .question-buttons {
     display: flex;
     flex-direction: column;
-    padding: 15px;
     gap: 8px;
-    border-top: 1px solid #eee;
+    padding: 15px; /* Adjusted padding */
+    position: absolute; /* Positioned absolutely within chat-box */
+    bottom: 0; /* Fixed to the bottom */
+    left: 0;
+    right: 0;
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for the button area */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow at the top */
+    border-top: 1px solid #eee; /* Light border at the top */
+    z-index: 10; /* Ensure it's above messages */
+    align-items: center; /* Center buttons horizontally */
+}
+
+/* Removed speech bubble tail for button containers */
+.initial-buttons::after,
+.question-buttons::after {
+    content: none;
 }
 
 .initial-buttons button,
 .question-buttons button {
-    background-color: #25d366;
+    background-color: #25d366; /* Original button color */
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 15px; /* Increased vertical padding for more height */
     border-radius: 20px;
     cursor: pointer;
     font-size: 15px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 10px); /* Increased width by reducing padding calculation */
+    max-width: 550px; /* Increased max-width */
+    align-self: center; /* Ensure individual buttons are centered */
 }
+
 
 .initial-buttons button:hover,
 .question-buttons button:hover {
@@ -176,10 +197,10 @@ body::before {
 
 .chat-input {
     display: flex;
-    padding: 2px 10px; /* Reduced padding to bring it up further */
-    border-top: none; /* Ensure no top border */
-    background-color: transparent; /* Ensure transparent background */
-    align-items: center; /* Keep items vertically centered */
+    padding: 2px 10px;
+    background-color: transparent;
+    align-items: center;
+    margin-top: auto;
 }
 
 .chat-input input[type="text"] {
@@ -188,7 +209,7 @@ body::before {
     border-radius: 20px;
     flex-grow: 1;
     margin-right: 10px;
-    background-color: transparent; /* Make input background transparent */
+    background-color: transparent;
 }
 
 .chat-input button {
@@ -203,4 +224,28 @@ body::before {
 
 .chat-input button:hover {
     background-color: #1da851;
+}
+
+/* Optional scrollbars styling */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .chat-header-name {
+        font-size: 1em;
+    }
+    .question-buttons button {
+        font-size: 14px;
+        padding: 10px 12px; /* Adjusted padding for smaller screens */
+    }
+    .chat-box {
+        padding-bottom: 130px; /* Adjust padding for smaller screens to accommodate buttons */
+    }
 }

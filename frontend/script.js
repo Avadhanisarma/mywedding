@@ -31,6 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
         chatHeaderStatus.textContent = 'Online';
     };
 
+    // New function to type messages line by line
+    const typeMessageLineByLine = async (lines, sender, delayPerLine = 500) => {
+        showTypingIndicator();
+        for (const line of lines) {
+            appendMessage(line, sender);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom after each line
+            await new Promise(resolve => setTimeout(resolve, delayPerLine));
+        }
+        hideTypingIndicator();
+    };
+
     const sendMessageToBot = async (message) => {
         console.log('Sending message to bot:', message);
         showTypingIndicator();
@@ -47,7 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data && data.response) {
                 console.log('Calling appendMessage with bot response:', data.response);
-                appendMessage(data.response, 'bot');
+                // Check if the response is an array (for line-by-line display)
+                if (Array.isArray(data.response)) {
+                    let delayForThisResponse = 500; // Default delay
+                    if (message === 'tell us more') { // Check if it's the specific message
+                        delayForThisResponse = 1000; // Increased delay for "tell us more"
+                    }
+                    await typeMessageLineByLine(data.response, 'bot', delayForThisResponse);
+                } else {
+                    appendMessage(data.response, 'bot');
+                }
             } else {
                 console.warn('Bot response was empty or malformed:', data);
                 appendMessage('Oops! The bot did not provide a clear response. Please check the console for details.', 'bot');
@@ -61,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initial message sequence
-    let delay = 500;
+    let delay = 1000; // Increased initial delay
 
     // 1. Namaskaram! 🙏
     setTimeout(() => {
@@ -70,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
 
     // 2. We Avadhani and Aiswarya getting married 👩‍❤️‍👨
-    delay += 1500;
+    delay += 2500; // Increased delay
     setTimeout(() => {
         hideTypingIndicator();
         appendMessage("Guided by divine grace and the blessings of our elders, We are cordially inviting you to witness the sacred beginning of our new journey together", 'bot');
@@ -79,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
 
     // 3. Guided by divine grace...
-    delay += 2000;
+    delay += 3000; // Increased delay
     setTimeout(() => {
         hideTypingIndicator();
         appendMessage("We Avadhani and Aiswarya getting married 👩‍❤️‍👨", 'bot');        
@@ -92,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tellUsMoreBtn.style.display = 'none'; // Hide new button initially
         }, 500);
     }, delay);
+
 
 
     whenBtn.addEventListener('click', async () => {
@@ -109,9 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
         appendMessage('Where is the venue?', 'user');
         await sendMessageToBot('venue');
 
-        if (chatBackgroundOverlay) {
-            chatBackgroundOverlay.style.backgroundImage = 'url("/static/images/backtwo.png")';
-        }
+        // Removed the line that changes the background image
+        // if (chatBackgroundOverlay) {
+        //     chatBackgroundOverlay.style.backgroundImage = 'url("/static/images/backtwo.png")';
+        // }
 
         setTimeout(() => {
             tellBtn.style.display = 'block';
