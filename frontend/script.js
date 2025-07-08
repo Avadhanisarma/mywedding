@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     delay += 3000; // Increased delay
     setTimeout(() => {
         hideTypingIndicator();
-        appendMessage("We <b>Avadhani</b> and <b>Aishwarya</b> getting married 👩‍❤️‍👨", 'bot');        
+        appendMessage("We <b>Avadhani</b> and <b>Aishwarya</b> are getting married 👩‍❤️‍👨", 'bot');        
         // Show the first question button after the last welcome message
         setTimeout(() => {
             questionButtonsDiv.style.display = 'flex';
